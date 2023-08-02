@@ -21,3 +21,9 @@ LEXICON_RU: dict[str, str] = {
 'user_won': 'Ты победил! Поздравляю!\n\nДавай сыграем еще?',
 'nobody_won': 'Ничья!\n\nПродолжим?',
 'bot_choice': 'Мой выбор'}
+
+LEXICON_COMMANDS_RU: dict[str, str] = {
+                '/command_1': 'command_1 desription',
+                '/command_2': 'command_2 desription',
+                '/command_3': 'command_3 desription',
+                '/delmenu': 'удалить меню'}

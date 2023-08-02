@@ -5,6 +5,9 @@ from keyboards.keyboards import game_kb, yes_no_kb
 from lexicon.lexicon_ru import LEXICON_RU
 from services.services import get_bot_choice, get_winner
 
+from aiogram import Bot
+from keyboards.set_menu import set_main_menu
+
 router: Router = Router()
 
 
@@ -42,3 +45,16 @@ async def process_game_button(message: Message):
                                 f'- {LEXICON_RU[bot_choice]}')
     winner = get_winner(message.text, bot_choice)
     await message.answer(text=LEXICON_RU[winner], reply_markup=yes_no_kb)
+
+# Этот хэндлер будет срабатывать на команду "/delmenu"
+# и удалять кнопку Menu c командами
+@router.message(Command(commands='delmenu'))
+async def del_main_menu(message: Message, bot: Bot):
+    await bot.delete_my_commands()
+    await message.answer(text='Кнопка "Menu" удалена')
+
+# Восстановление меню на команду "/restoremenu"
+@router.message(Command(commands='restoremenu'))
+async def restore_main_menu(message: Message, bot: Bot):
+    await set_main_menu(bot)
+    await message.answer(text='Кнопка "Menu" восстановлена')
